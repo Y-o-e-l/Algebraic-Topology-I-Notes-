@@ -1,0 +1,520 @@
+\documentclass[leqno, openany]{memoir}
+\setulmarginsandblock{3cm}{3cm}{*}
+\setlrmarginsandblock{3cm}{3.5cm}{*}
+\checkandfixthelayout
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{MnSymbol}
+\usepackage{bm}
+\usepackage{accents}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usetikzlibrary{automata,positioning}
+\usepackage{tikz-cd}
+\usepackage{forest}
+\usepackage{braket} 
+\usepackage{listings}
+\usepackage{mdframed}
+\usepackage{verbatim}
+\usepackage{physics}
+%\usepackage{/home/patrickl/homework/macaulay2}
+
+%font
+\usepackage[sc]{mathpazo}
+\usepackage{eulervm}
+\usepackage[scaled=0.86]{berasans}
+\usepackage{inconsolata}
+\usepackage{microtype}
+
+%CS packages
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% typeset and bib
+\usepackage[english]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc} 
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\usepackage[bookmarks, colorlinks, breaklinks]{hyperref} 
+\hypersetup{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+
+% other formatting packages
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{csquotes}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{parskip}
+
+\usepackage{lipsum}
+
+% delimiters
+\DeclarePairedDelimiter{\gen}{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exm}[thm]{Example}
+\newtheorem{exms}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{rmks}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+
+% unnumbered theorems
+\theoremstyle{plain}
+\newtheorem*{thm*}{Theorem}
+\newtheorem*{prop*}{Proposition}
+\newtheorem*{lem*}{Lemma}
+\newtheorem*{cor*}{Corollary}
+\newtheorem*{conj*}{Conjecture}
+
+% unnumbered definitions
+\theoremstyle{definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem*{exer*}{Exercise}
+\newtheorem*{defns*}{Definitions}
+\newtheorem*{con*}{Construction}
+\newtheorem*{exm*}{Example}
+\newtheorem*{exms*}{Examples}
+\newtheorem*{notn*}{Notation}
+\newtheorem*{notns*}{Notations}
+\newtheorem*{addm*}{Addendum}
+
+
+\theoremstyle{remark}
+\newtheorem*{rmk*}{Remark}
+
+% shortcuts
+\newcommand{\Ima}{\mathrm{Im}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\k}{\Bbbk}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\M}{\overline{M}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\n}{\mathfrak{n}}
+\renewcommand{\b}{\mathfrak{b}}
+\newcommand{\ep}{\varepsilon}
+\newcommand*{\dt}[1]{%
+   \accentset{\mbox{\Huge\bfseries .}}{#1}}
+\renewcommand{\abstractname}{Official Description}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mr}[1]{\mathrm{#1}}
+\newcommand{\ms}[1]{\mathsf{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\powerset}{\mathscr{P}}
+\newcommand{\pset}{\mathscr{P}}
+\newcommand{\catname}{\mathsf}
+\newcommand{\p}{^{\prime}}
+\newcommand{\pp}{^{\prime\prime}}
+\newcommand{\iso}{\cong}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dx}{\,dx}
+\newcommand{\dy}{\,dy}
+\newcommand{\dz}{\,dz}
+\newcommand{\de}{\,d}
+\newcommand{\dvol}{d\!\vol}
+\newcommand{\ceq}{\coloneqq}
+\newcommand{\tto}{\rightrightarrows}
+\newcommand{\nat}{\Rightarrow}
+\newcommand{\PGL}{PGL}
+\newcommand{\PSL}{PSL}
+\newcommand{\SL}{SL}
+\newcommand{\GL}{GL}
+\newcommand{\qd}{\ \ \ \ \ \ \qedhere}
+\newcommand{\proj}{\mathbb{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\sopin}{\Delta^{\text{op}}_{\text{inj}}}
+\newcommand{\opp}{^\text{op}}
+
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+
+\DeclareMathOperator{\Grp}{\mathsf{Grp}}
+\DeclareMathOperator{\Ab}{\mathsf{Ab}}
+\DeclareMathOperator{\Ring}{\mathsf{Ring}}
+\DeclareMathOperator{\Mod}{\mathsf{Mod}}
+\DeclareMathOperator{\Fld}{\mathsf{Fld}}
+\DeclareMathOperator{\Top}{\mathsf{Top}}
+\DeclareMathOperator{\Vect}{\mathsf{Vect}}
+\DeclareMathOperator{\Sets}{\mathsf{Set}}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\fin}{fin}
+\DeclareMathOperator{\irr}{irr}
+\DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Alt}{Alt}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Char}{Char}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\sk}{sk}
+\DeclareMathOperator{\tp}{Top}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\sSet}{sSet}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\res}{Res}
+\DeclareMathOperator{\Cone}{\mathsf{Cone}}
+\DeclareMathOperator{\nl}{null}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\tors}{Tors}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\colim}{Colim}
+
+% Section formatting
+\titleformat{\section}
+    {\Large\sffamily\scshape\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]
+    {\large\sffamily\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[runin]{\normalfont\itshape}{\thesubsubsection}{1em}{}
+
+\title{Algebraic Topology I}
+\author{Lectures by Andrew Blumberg, Notes by Yousif Elhag}
+\date{SEMESTER}
+
+\newcommand*{\titleSW}
+    {\begingroup% Story of Writing
+    \raggedleft
+    \vspace*{\baselineskip}
+    {\Huge\itshape Algebraic Topology 1}\\[\baselineskip]
+    {\large\itshape Notes by Yousif Elhag}\\[0.2\textheight]
+    {\Large Lectures by Andrew Blumberg}\par
+    \vfill
+    {\Large \sffamily Columbia University}
+    \vspace*{\baselineskip}
+\endgroup}
+\pagestyle{simple}
+
+\chapterstyle{ell}
+
+
+%\renewcommand{\cftchapterpagefont}{}
+\renewcommand\cftchapterfont{\sffamily}
+\renewcommand\cftsectionfont{\scshape}
+\renewcommand*{\cftchapterleader}{}
+\renewcommand*{\cftsectionleader}{}
+\renewcommand*{\cftsubsectionleader}{}
+\renewcommand*{\cftchapterformatpnum}[1]{~\textbullet~#1}
+\renewcommand*{\cftsectionformatpnum}[1]{~\textbullet~#1}
+\renewcommand*{\cftsubsectionformatpnum}[1]{~\textbullet~#1}
+\renewcommand{\cftchapterafterpnum}{\cftparfillskip}
+\renewcommand{\cftsectionafterpnum}{\cftparfillskip}
+\renewcommand{\cftsubsectionafterpnum}{\cftparfillskip}
+\setrmarg{3.55em plus 1fil}
+\setsecnumdepth{subsection}
+\maxsecnumdepth{subsection}
+\settocdepth{subsection}
+
+\begin{document}
+    
+\begin{titlingpage}
+\titleSW
+\end{titlingpage}
+
+\thispagestyle{empty}
+
+
+
+\tableofcontents
+
+\chapter{Learning the Lingo}% \label{cha:basic_notions}
+The following is a transcription of notes for Professor Andrew Blumberg's ``Algebraic Topology 1." For consultation regarding the material in the notes, his office is room 607 in the Math department. Although there isn't a strict textbook this course will be using, some choice texts to read ahead of the notes will be 
+\begin{itemize}
+    \item Peter May's ``Concise course in Algebraic Topology"
+    \item Haynes Miller's ``Notes on Algebraic Topology"
+    \item Munkres's ``Elements of Algebraic Topology"
+    \item Weibel's ``Homological Algebra"
+    \item Saunders \& Maclane's ``Categories for the Working Mathematician" (Although, IMO, Riehl's ``Category Theory in Context" is better written.)
+\end{itemize}
+Algebraic topology, at its core, answers questions regarding classification, turning geometric problems into ones relying on algebra (which is somehow supposed to be easier). For instance, consider the spaces $\R^2$ and $\R^3$; 
+\par \underline{Question:} Are $\R^2$ and $\R^3$ the same as sets? $\rightarrow$ Well, although there is a bijection $\R^3 \iso \R^2$, this is insufficient for the ways we want to think about things in Algebraic topology. As we'll later see, $\R^2 \neq \R^3$ in our senses of ``being the same."
+\section{Category Theory for People who aren't Peter May}% \label{sec:categorical_notions}
+\begin{defn}
+    A \emph{category} $C$ is a collection of data consisting of objects $\Obj(C)$ and a collection of morphisms between said-objects. Each object $X \in \Obj(C)$ has an identity morphism $1_X: X \to X$. Additionally, any morphisms $f,g \in \Mor(C)$ are associative with respect to composition.
+\end{defn}
+
+\begin{exm}
+    One useful example of a category we may work with is the category $\Vect$, with objects consisting vector spaces with linear maps as morphisms. 
+\end{exm}
+
+\begin{defn}
+    Given two categories $C, D$, then a \emph{functor} $F: C \to D$ is a map of categories such that: 
+    \begin{enumerate}
+        \item $F$ takes objects in $C$ to objects in $D$, ie. $x \in \Obj(C) \mapsto F(x) \in \Obj(D)$.
+        \item For an object $X \in \Obj(C)$, we have functors acting on morphisms $f \in \Mor(C)$, ie. $f(X) \in \Obj(C) \mapsto F(f(X)) \in \Obj(D)$.
+    \end{enumerate}
+\end{defn}
+One useful aspect of category theory is that we can give definitions that better specialize familiar notions:
+
+\begin{defn}
+    In a category $C$, we call a morphism $f: X \to Y$ an \emph{isomorphism} if there exists a map $g: Y \to X$ such that $f \circ g \iso \id_Y$ and $g \circ f \iso \id_X$. 
+\end{defn}
+\begin{exm*}
+    For instance, for the category $C$ given by the diagram:
+    \[\begin{tikzcd}
+        \bullet_0 \arrow[r] \arrow[d] & \bullet_1 \\ \bullet_2
+    \end{tikzcd}\]
+    We see that the only isomorphisms are the identity morphisms of each object. In the category $\Top$, the isomorphisms are homeomorphisms. In the category $\Vect$, the isomorphisms are are invertible linear maps of vector spaces.
+\end{exm*}
+
+\begin{addm*}
+    As noted in class, functors of categories $F: C \to D$ preserve isomorphisms, ie. $F(f) \circ F(g) = F(f \circ g) = F(id_Y)= \id_{F(X)}$.
+\end{addm*}
+\par 
+Now, if we were to be working in the category $\Sets$, then taking $X, Y \in \Obj(\Sets)$, we define cartesian products as $X \times Y  := \{ (a,b) \mid a \in X, b \in Y\}$. However, this definition of products only really works when we're in the category $\Sets$, and doesn't bode well in general. As such, we have to work to adapt this definition more broadly in categorical language. 
+
+\begin{defn}
+    Given maps $f: A \to X$ and $g: A \to Y$, observe that we obtain a unique product map $A \to X \times Y$ given by $x \mapsto (f(x), g(x))$. Using this, we define a categorical \emph{product}, as saying that anytime we have maps $A \to X$ and $A \to Y$, we have a unique map $A \to X \times Y$, giving the diagram:
+    \[\begin{tikzcd}[row sep = large]
+A \arrow[drr, bend left] \arrow[ddr, bend right] \arrow[dr, dotted, description] & & \\ & X \times Y \arrow[r, "\pi_1"] \arrow[d, "\pi_2"] & X \arrow[d] \\ & Y \arrow[r] & X
+\end{tikzcd}\]
+\end{defn}
+
+\begin{defn}
+    The dual-notion of a product, or \emph{coproduct}, is built up analogously. Given maps $Y \to Z$ and $X \to Z$, we obtain a colimit by ``flipping"\footnote{Slightly imprecise language, we are considering maps from the empty sets into $X, Y \in \Obj(C)$ as well and using those to construct our notion of coproducts} the morphisms of the above diagram so as to obtain the diagram:
+    \[ \begin{tikzcd}[row sep=huge]
+        & Z  & \\
+        X\ar[ur] \ar[r,"\pi_{X}", swap] & X \coprod Y \ar[u,dashed] & Y \ar[ul] \ar[l,"\pi_{Y}"] \\ & \varnothing \arrow[ur] \arrow[ul]&
+    \end{tikzcd}
+    \]
+\end{defn}
+
+\section{More Category Theory for People Who Aren't Peter May}
+
+As a side-note, I'll be noting some additional things not covered in the lecture since I feel these are important pre-requisites to include for my own full understanding of the material. I'll try my best not to obfuscate Blumberg's exposition of the material.
+
+\begin{defn}
+For a category $C$, the \emph{opposite category} $C\opp$ is a category including the following data:
+\begin{itemize}
+    \item The objects of $C^{\text{op}}$ are the same as those in $C$.
+    \item The morphisms $f\opp \in C\opp$ switches the domains and codomains for each morphism in $f \in \Mor(C)$, ie. 
+    \[[f\opp : Y \to X] \in \Mor(C\opp)  \leftrightsquigarrow [f: X \to Y] \in \Mor(C)\]
+\end{itemize}
+\end{defn}
+
+
+\begin{lem}
+    In a category $C$, the following are equivalent: 
+    \begin{enumerate}
+        \item $f \in \Map_C(x,y)$ is an isomorphism.
+        \item For all objects $z \in \Obj(C)$, post-composition with $f: x \to y$ defines a bijection.
+        \[\Map_C(z,x) \xrightarrow{\iso} \Map_C(z,y)\]
+        \item For all objects $d \in \Obj(C)$, pre-composition with $f: x \to y$ defines a bijection 
+        \[\Map_C(y,d) \xrightarrow{\iso} \Map_C(x,d)\]
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    Assuming (1.), then $f: x \to y$ has an inverse $g: y \to x$ where, by associativity and identity laws for composition over the category $C$, post-composition defines an inverse function 
+    \[g_\ast: \Map_C(z,y) \to \Map_C(z,x)\]
+    to the function $f_\ast: \Map_C(z,x) \to \Map_C(z,y)$. As we can see, $g_\ast \circ f_\ast: \Map_C(z,x) \to \Map_C(z,x)$ and $f_\ast \circ g_\ast: \Map_C(z,y) \to \Map_C(z,y)$ are both identity functions. Now, assuming (ii.), there must be $g\in \Map_C(y,x)$ whose image under image under $f_\ast: \Map_C(y,x) \to \Map_C(y,y)$ is the identity $1_y$. By construction, $1_y = f\circ  g$, but by associativity, the elements of $gf$, $1_x \in \Map_C(x,x)$ have the common image $f$ under the function $f_\ast: \Map_C(x,x) \to \Map_C(x,y)$ when $gf = 1_x$. Therefore, $(1.) \iff (2.)$; We obtain $(1.) \iff (3.)$ by duality.
+\end{proof}
+
+\subsection{Sidenote: Enriched Categories}
+Let us consider the category $\Top$, with which we know $\Map_C(x,y)$ is itself an object of $\Top$. We express an interest in categories $C$ where $\Map_C(x,y)$ is an abelian group. To better capture this notion, we introduce the idea of an enriched category.
+
+We consider enriched categories as categories where hom-sets (ie. $\Map_C(x,y)$) are not just sets and have more structure in an enriched category $\mathcal{V}$.
+\begin{addm*}
+    Consider three objects $U,V,W \in \Obj(C)$. Given morphisms $f \in \Map_C(U,V)$ and $g \in \Map_C(V,W)$, we know that there exists a composition map $g \circ f \in \Map_C(U,W)$. Viewing all objects of the form $\Map_C(-,-)$ as objects of an enriched category $\mathcal{V}$, we wish to have a relation of the form 
+\[\Map_C(U,V) \times \Map_C(V,W) \to \Map_C(U,W)\]
+One of the conditions to have this structure on $\mathcal{V}$ is to induce the structure of a \textcolor{red}{monoidal category}.
+\end{addm*}
+
+\newpage
+\begin{defn} 
+    A {\emph{monoidal category}} $(\mathcal{V}, \otimes, i)$ consists of the following data:
+    \begin{enumerate}
+        \item A category $\mathcal{V}$
+        \item A monoidal product as a bi-functor $\otimes: \mathcal{V} \times \mathcal{V} \to \mathcal{V}$
+        \item A monoidal unit $i$
+    \end{enumerate}
+    which satisfies the natural isomorphisms expressing associativity and unitality of the monoidal product, ie. 
+    \[\alpha: X \otimes (Y \otimes Z) \xrightarrow{\iso} (X \otimes Y) \otimes Z, \ \ \lambda: i \otimes X \xrightarrow{\iso} X,  \ \ \rho: X \otimes i \xrightarrow{\iso} X\]
+\end{defn}
+
+\begin{addm}
+    A \emph{symmetric monoidal category} has the additional condition that the monoidal product is commutative, meaning that there is an additional natural isomorphism $X \otimes Y \iso Y \otimes X$
+\end{addm}
+
+\begin{exm}
+    The triple $(\Mod_R, \otimes_R, R)$ where $\Mod_R$ is the category of modules over a commutative ring $R$ is a monoidal category.
+\end{exm}
+
+\begin{defn}
+    A \emph{category $C$ enriched over $\mathcal{V}$ (or a $\mathcal{V}$-category $\bold{C}$)} is given by the data of:
+    \begin{enumerate}
+        \item A collection of objects, denoted $\Obj(C)$.
+        \item For each ordered pair of objects $X,Y \in \Obj(C)$, there is an object $\Map_C(X,Y) = \bold{C}(X,Y)\ \text{in } \mathcal{V}$.
+        \item For each ordered triple $X,Y,Z \in C$, there is a morphism $\circ: \bold{C}(X,Y) \otimes \bold{C}(Y,Z) \to \bold{C}(X,Z)$ in $\mathcal{V}$.
+        \item For each object $X \in \Obj(C)$, there is a morphism $\id_X: i \to \bold{C}(X,X)$ in $\mathcal{V}$ such that 
+        \begin{itemize}
+            \item For each $W,X,Y,Z \in \Obj(C)$, the composition in $\bold{C}$ is associative such that the diagram:
+            \[\begin{tikzcd}
+                \bold{C}(Y,Z) \otimes \bold{C}(X,Y) \otimes \bold{C}(W,X) \ar[r, "1 \otimes \circ"] \ar[d, "\circ \otimes 1"] & \bold{C}(Y,Z) \otimes \bold{C}(W,Y)  \ar[d, "\circ"] \\
+                \bold{C}(X,Z) \otimes \bold{C}(W,X) \ar[r, "\circ"] & \bold{C}(W,Z)
+            \end{tikzcd}\]
+           is commuting.
+           \item For each $X,Y,Z \in \Obj(C)$, the following diagram commutes:
+           \[\begin{tikzcd}
+               \bold{C}(X,Y) \otimes i \ar[d, "1\otimes \id_X"] \ar[dr, "\iso"] &  &  i \otimes \bold{C}(X,Y) \ar[dl, "\iso", swap] \ar[d, "\id_Y\otimes 1"] 
+               \\
+               \bold{C}(X,Y) \otimes \bold{C}(X,X) \ar[r, "\circ"] & \bold{C}(X,Y) & \ar[l, "\circ"]\bold{C}(Y,Y) \otimes \bold{C}(X,Y)
+           \end{tikzcd}\]
+        \end{itemize}
+    \end{enumerate}
+\end{defn}
+
+\begin{exm}[Enriched Categories] We list some examples of enriched categories:
+    \begin{itemize}
+        \item Given the symmetric monoidal category $\mathcal{V} = (\Vect_K, \otimes_K, K)$, we can define $\Vect_K$ to be a $\mathcal{V}$-category. For two linear maps $f,g\in \Vect_K(U,W)$, we can easily verify and check that we have associativity and commutativity as in (Definition 1.2.6).
+        \item Consider the category of modules over a fixed commutative ring $R$, which we denote $\Mod_R$. The category of Abelian groups $\Ab$ has a monoidal structure such that $\Mod_R$ is enriched over $(\Ab, \otimes_{\Z}, \Z)$.
+    \end{itemize}
+\end{exm}
+
+\newpage
+\subsection{Natural Transformations \& (Co)Limits}
+
+\begin{defn}
+    Given categories $C$ and $D$, and functors $F,G: C \rightrightarrows D$, a \emph{natural transformation} $\alpha: F \implies G$ consists of:
+    \begin{enumerate}
+        \item An arrow $\alpha_C: F(c) \to G(c)$ for each object $c \in \Obj(C)$, the collection of which defines the components of the natural transformation.
+        \item For each morphism $f: c \to d$ in $C$, we have a commuting diagram:
+        \[\begin{tikzcd}
+            F(c) \ar[r, "\alpha_C"] \ar[d, "F(f)", swap] & G(c) \ar[d, "G(f)"] \\
+            F(d) \ar[r, "\alpha_D"] & G(d)
+        \end{tikzcd}\]
+    \end{enumerate}
+\end{defn}
+\begin{defn}
+    A \emph{natural isomorphism} is a natural transformation $\alpha: F \implies G$ in which every component $\alpha_C$ is an isomorphism.
+\end{defn}
+
+
+\begin{defn}
+    For any object $c \in \Obj(C)$ and any category $J$, the \emph{constant functor} $I_C: J \to C$ is a functor sending every object of $J$ to $c \in C$ and every morphism $f \in \Mor(J)$ to the identity morphism $1_c$.
+\end{defn}
+
+\begin{defn}
+    A \emph{cone} over a diagram $F: J \to C$ with summit $c \in \Obj(C)$ is a natural transformation $\lambda: I_c \implies F$ whose domain is the constant functor at $c$. The components $\{\lambda_i: c \to F_i\}_{i \in I}$ of the natural transformation are called the \emph{legs of the cone}. More explicity,
+    \begin{itemize}
+        \item The data of a cone $F: J \to C$ with summit $c$ consists of a collection of morphisms $\lambda_i: c \to F_i$. 
+        \item A family of morphisms $\{\lambda_i: c \to F_i\}$ defines a cone over $F$ iff for each morphism $f: x \to y$ in $J$, the following triangle commutes in $C$:
+        \[\begin{tikzcd}
+            & c \ar[dl, "\lambda_x", swap] \ar[dr, "\lambda_y"]& \\
+            Fx \ar[rr, "F(f)", swap] &  & Fy
+        \end{tikzcd}\]
+    \end{itemize}
+    Dually, a cone under $F$ with nadir $c \in \Obj(C)$ is a natural transformation $\lambda: F \implies I_C$ whose legs are components $\{\lambda_j: F_i\to c\}_{i \in I}$. For each morphism $f: x \to y$ in J, the above triangle with morphisms $\lambda_x, \lambda_y$ flipped will commute.
+\end{defn}
+  \begin{addm}
+      A \emph{cone under a diagram} $F: J \to C$ is also called a cocone and is defined analogously to cones over a diagram. A cone under $F: J \to C$ is precisely a cone over $F\opp: J\opp \to C\opp$.
+  \end{addm}
+
+\begin{defn}
+    For any diagram $F: J \to C$, there is a functor, 
+    \[\Cone(-,F): C\opp \to \Sets\]
+    which sends $c \in C$ to the set of cones over $F$ with summit $c$. Using the Yoneda Lemma\footnote{Recall that Yoneda's Lemma states: For any functor $F: C \to \Sets$ whose domain $C$ is locally small, then for any object $c \in C$, there's a bijection:
+    \[\Hom(\bold{C}(c,-), F) \iso Fc\]}, a \emph{limit} consists of an object $\lim F\in C$ together with a universal cone $\lambda: \lim F \implies F$, called the limit cone, defining a natural isomorphism 
+    \[\bold{C}(-,\lim F) \iso \Cone(-,F)\]
+\end{defn}
+
+\newpage
+\begin{defn}
+    Dually, there is a functor $\Cone(F,-): C \to \Sets$ that sends $c \in C$ to the set of cones with nadir $c$. A \emph{colimit} of $F$ is a representation for $\Cone(F,-)$. Again, by Yoneda's Lemma, a colimit consists of an object $\colim F \in C$ together with a universal conve $\lambda: F \implies \colim F$, called the colimit cone, defining a natural isomorphism:
+    \[\bold{C}(\colim F, -) \iso \Cone(F, -)\]
+\end{defn}
+
+\begin{addm*}
+    We may also equivalently define limits of $F$ as the terminal object in the category of cones over $F$ and colimits as the initial object in the category of cones over $F$.
+\end{addm*}
+
+\begin{exm}[Definition of Product]
+    A product is a limit of a diagram indexed by a discrete category with only identity morphisms. A diagram in $C$ indexed by a discrete category $J$ consists of a collection of objects $F_j \in C$ indexed by $j \in J$.
+    
+    A cone over this diagram with summit $c \in C$ is a $J$-indexed family of morphisms $\{\lambda_j: c \to F_j\}_{j \in J}$. This limit is denoted by $\Pi_{j\in J} F_j$ and the legs of the cone are maps,
+    \[\bigg(\pi_k: \prod_{j \in J} F_j \to F_k \bigg)_{k \in J}\]
+\end{exm}
+
+\begin{defn}
+    A category is \emph{complete} if it contains all limits. A category is \emph{cocomplete} if it contains all colimits.
+\end{defn}
+
+\begin{exm}
+    The category $\Sets$ is complete and cocomplete. The category $\Fun(C\opp, \Sets)$ is also complete and cocomplete; Observe that given the map $Y: C \to \Fun(C\opp, \Sets)$, which maps $x \mapsto \Map_C(-,x) = \bold{C}(-,x)$, that $Y$ is a fully-faithful\footnote{Recall that for locally small categories $C$ and $D$, the functor $F: C \to D$ induces a function $F_{X,Y}:  \Map_C(x,y) \to \Map_D(F(x), F(y))$. We say $F$ is faithful if $F_{X,Y}$ is injective, and full if $F_{X,Y}$ is surjective.} functor, and so the map 
+    \[\Map_C(x,y) \xrightarrow{\iso} \Map(Y(x), Y(y))\]
+    is an isomorphism.
+\end{exm}
+
+\subsubsection{Why does this matter?}
+Consider the category $\Top$. When constructing objects like Klein bottles, $\R$ or $\C$ projective space, or any cell complex via attaching maps, we define these as sets equipped with particular topologies. 
+
+These topologies can all be uniformly defined by our notions of limits and colimits via universal cones. As we'll observe, constructed topological spaces can be characterized either as a limit or colimit of a specific diagram over the category $\Top$. By mapping things out of standard topological objects (For instance, mapping out of $S^n$, ie. $\{\Map_C(S^n, -)\}$), we're able to extrapolate more information about these objects.
+
+$\Map_{\Top}(X,Y)$ is a space. Considering the map $H: [0,1] \to \Map_{\Top}(X,Y)$ with path homotopies given between $f:X \to Y \leftrightsquigarrow H(0)$ and $g: X \to Y \leftrightsquigarrow H(1)$, we'll later see that these are the same.  The maps $\{\Map_C(S^n, -)\}$ are the same if there exists a path between them, and so we develop a notion of \textcolor{red}{homotopy} via $\Map_{\Top}(I, \Map_{\Top}(X,Y))$.
+
+
+
+
+
+
+
+
+\end{document}.

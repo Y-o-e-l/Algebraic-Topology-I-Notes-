@@ -178,6 +178,7 @@
 \DeclareMathOperator{\Top}{\mathsf{Top}}
 \DeclareMathOperator{\Vect}{\mathsf{Vect}}
 \DeclareMathOperator{\Sets}{\mathsf{Set}}
+\DeclareMathOperator{\Hotop}{\mathsf{HoTop}}
 \DeclareMathOperator{\Obj}{Obj}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Mor}{Mor}
@@ -510,6 +511,73 @@ These topologies can all be uniformly defined by our notions of limits and colim
 
 $\Map_{\Top}(X,Y)$ is a space. Considering the map $H: [0,1] \to \Map_{\Top}(X,Y)$ with path homotopies given between $f:X \to Y \leftrightsquigarrow H(0)$ and $g: X \to Y \leftrightsquigarrow H(1)$, we'll later see that these are the same.  The maps $\{\Map_C(S^n, -)\}$ are the same if there exists a path between them, and so we develop a notion of \textcolor{red}{homotopy} via $\Map_{\Top}(I, \Map_{\Top}(X,Y))$.
 
+\newpage
+\section{Homotopy (And more Category) Theory}\footnote{Some of the notes in the following section are provided by Peyton Chui.}
+An \textcolor{red}{adjunction} consists of an opposing pair of functors $F: C \leftrightarrows D: G$ that enjoy special relations to each other.
+
+\begin{defn}
+    An \emph{adjunction} consists of a pair of functors $F: C \to D$ and $G: D \to C$ together with an isomorphism 
+    \[\Map_D(Fc, d) \iso \Map_C(c, Gd)\]
+    for each $c\in C$ and $d \in D$ that is natural in both variables. Here, $F$ is \emph{left-adjoint} to $D$ and $G$ is \emph{right-adjoint} to C.
+\end{defn}
+
+Consider a map $H: I \to \Map_{\Top}(X,Y)$. By adjunction, this is the same data as a map $H: X \times I \to Y$. We'll be interested in the homotopy category $\Hotop$; And here, we will consider the quotients:  $\Map_{\Top}(X,Y)/\sim$ where $``\sim "$ is the relation of homotopy, which is to say there is a path between morphisms $X \to Y$.
+
+Under these relations we develop a new notion of equivalence between spaces $X$ and $Y$, which we call \textcolor{red}{homotopy equivalence}.
+
+
+\begin{defn}
+    Consider two morphisms $f: X \to Y$ and $g: Y \to X$. We say that $X$ and $Y$ are \emph{homotopy equivalent} if $f \circ g \sim \id_Y$ and $g \circ f \sim \id_X$.
+\end{defn}
+
+Recall that our initial goal with algebraic topology is to find functors from $\Top$ to some algebraic category, but which functors will we need. Well, as it turns out, we need these functors to respect homotopy equivalence, which is say that $X \sim Y \implies F(X) \iso F(Y)$. 
+
+\begin{addm*}
+    Note that $F(X)$ and $F(Y)$ are isomorphic, not necessarily strictly equal. A slightly stronger restriction on our functors we might want is that they factor through $\Hotop$. This is stronger since, whenever $f$ and $g$ are homotopic, the map they induce must also be the same.
+\end{addm*}
+
+Now, we're interested in classifying spaces up to homotopy, but dealing with every space and map in $\Top$ would probably kill me. As such, we're going to identify the class of spaces which is ``big enough" (in some arcane sense).
+
+\begin{itemize}
+    \item Consider the push-out diagram 
+\[\begin{tikzcd}
+    \bullet \ar[d] \ar[r] & \bullet \\ \bullet
+\end{tikzcd}\]
+\item We also have the push-out diagram 
+\[\begin{tikzcd}
+    S^{n-1} \ar[r] \ar[d] & D^n \ar[d]\\ D^n \ar[r] & S^n
+\end{tikzcd}\]
+\item We also then have the push-out
+\[\begin{tikzcd}
+    S^{n-1} \ar[r] \ar[d] &\bullet \ar[d] \\ \bullet \ar[r] & \bullet
+\end{tikzcd}\]
+Here, we have pushouts which do not respect homotopy equivalence, which is not desirable. However, we have (at least) three roughly equivalent tactics of solving this problem:
+\end{itemize}
+\newpage 
+
+\begin{enumerate}
+    \item Maps out of spheres $S^n$, these being in the set of based maps\footnote{Based maps are maps out of based spaces/pointed spaces, like $(X,x_0)$ with base point $x_0$ into $(Y, y_0)$, ie. $f: (X,x_0) \to (Y,y_0)$.} $\{\Map_\ast (S^n, X)/\sim \}$. This turns out to have an algebraic structure, ie. homotopy groups.
+    \item Spaces built out of simple pieces which are then restricted by attaching spheres along their boundary, ie. CW-complexes.
+    \item Combinatorial models of space developed out of simplicial complexes.
+\end{enumerate}
+
+Consider the space $\Map_\ast(S^0, X)/\sim $. The data of the based map $S^0 \to X$ is simply picking a point in $X$, and two maps are homotopic to each other when their images of points are path-connected. As such, we can identify $\Map_\ast(S^0, X)/\sim$ with path components in $X$; We call this $\pi_0(X)$, or the $0$-th homotopy group. Thinking about $\Map_\ast(S^1, X)$, or $\pi_1(X)$, it has an algebraic structure given by:
+\[\left(\Map_\ast(S^1,X)/\sim\right) \times \left( \Map_\ast(S^1, X)/\sim \right) \rightarrow \Map_\ast(S^1 \vee S^1, X)/\sim \rightarrow \Map_\ast(S^1, X)/\sim\]
+Looking at $\pi_n(X)$ for $n \geq 2$, we'll later see that these form abelian groups. 
+
+
+\begin{defn}
+    We say that the map $f: X \to Y$ is a \emph{weak equivalence} if the induced map on homotopy groups, $f_\ast: \pi_n(X) \to \pi_n(Y)$ is an equivalence for all $n$.
+\end{defn}
+
+\underline{Question:} What is the relationship between weak-equivalence and homotopy equivalence? 
+\par
+Well, if $X \simeq Y$, then $X$ is weakly equivalent to $Y$. This is a fairly-straightforward exercise where we induced a map $\Map_\ast(S^n,X)/\sim \to \Map_\ast(S^n, Y)/\sim$ given by homotopy equivalence and do so in the reverse direction as well. 
+\\
+\par 
+\underline{Question:} Can we compute $\pi_n(X)$ for reasonable $n$ and $X$? Well, occasionally. 
+
+This will be what leads us to our soon-to-be-defined notion of a CW-complex. 
 
 
 
@@ -517,4 +585,18 @@ $\Map_{\Top}(X,Y)$ is a space. Considering the map $H: [0,1] \to \Map_{\Top}(X,Y
 
 
 
-\end{document}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
